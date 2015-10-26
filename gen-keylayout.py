@@ -37,7 +37,7 @@ class KeyTree(object):
         if node.output is not None:
             sys.stderr.write("[error] Duplicating path '{}'\n".format(path))
             sys.exit(1)
-        node.output = output
+        node.output = escape(output)
 
     def compile(self):
         actions = {}
@@ -159,8 +159,6 @@ def state_factory():
         if index is None:
             index, states[value] = (len(states) + 1,) * 2
         return ':{}'.format(index)
-    #def state(value):
-    #    return (':' + value) if value != '' else 'none'
     return state
 
 def escape(string):
