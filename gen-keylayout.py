@@ -276,7 +276,7 @@ US_CAPS_LAYOUT = {
 KEY_LAYOUT_TEMPLATE = """\
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
-<!-- Layout is genertated with "gen-keylayout.py"
+<!-- Layout is generated with "gen-keylayout.py"
      Author: Pavel Aslanov
      Home  : https://github.com/aslpavel/gen-keylayout
 -->
