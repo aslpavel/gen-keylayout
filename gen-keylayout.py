@@ -86,6 +86,9 @@ def main():
     if len(sys.argv) < 2:
         sys.stderr.write('Usage: {} <layout.json>\n'.format(os.path.basename(sys.argv[0])))
         sys.exit(1)
+    if sys.version_info[0] < 3:
+        sys.stderr.write('[error] Python version is less then 3.0\n')
+        sys.exit(1)
     with open(sys.argv[1]) as layout_file:
         layout = json.load(layout_file)
     # validate
@@ -137,12 +140,16 @@ def main():
                          .format(align(depth), state, output))
         return stream.getvalue().rstrip()
 
+    keys_default = {c: ("output", escape(o)) for c, o in US_LAYOUT.items()}
+    keys_caps_default = {c: ("output", escape(o)) for c, o in US_CAPS_LAYOUT.items()}
     sys.stdout.write(KEY_LAYOUT_TEMPLATE.format(**{
         'name'        : layout['name'],
         'group'       : 7,
         'index'       : 19458,
         'keys'        : keys_fmt({k: v for k, v in keys.items() if k <= 0xff}, 3),
-        'keys_caps'   : keys_fmt({k & 0xff: v for k, v in keys.items() if k > 0xff}, 3), 
+        'keys_caps'   : keys_fmt({k & 0xff: v for k, v in keys.items() if k > 0xff}, 3),
+        'keys_default': keys_fmt(keys_default, 3),
+        'keys_caps_default': keys_fmt(keys_caps_default, 3),
         'actions'     : actions_fmt(actions, 2),
         'terminators' : terms_fmt(terms, 2),
     }))
@@ -220,11 +227,59 @@ NAME_TO_CODE = {
 }
 CODE_TO_NAME = {code: name for name, code in NAME_TO_CODE.items()}
 
+US_LAYOUT = {
+    0: "a", 1: "s", 2: "d", 3: "f", 4: "h", 5: "g", 6: "z", 7: "x",
+    8: "c", 9: "v", 10: "\u00a7", 11: "b", 12: "q", 13: "w", 14: "e",
+    15: "r", 16: "y", 17: "t", 18: "1", 19: "2", 20: "3", 21: "4",
+    22: "6", 23: "5", 24: "=", 25: "9", 26: "7", 27: "-", 28: "8",
+    29: "0", 30: "]", 31: "o", 32: "u", 33: "[", 34: "i", 35: "p",
+    36: "\r", 37: "l", 38: "j", 39: "'", 40: "k", 41: ";", 42: "\\",
+    43: ",", 44: "/", 45: "n", 46: "m", 47: ".", 48: "\t", 49: " ",
+    50: "`", 51: "\b", 52: "\u0003", 53: "\u001b", 65: ".", 66: "\u001d",
+    67: "*", 69: "+", 70: "\u001c", 71: "\u001b", 72: "\u001f", 75: "/",
+    76: "\u0003", 77: "\u001e", 78: "-", 81: "=", 82: "0", 83: "1",
+    84: "2", 85: "3", 86: "4", 87: "5", 88: "6", 89: "7", 91: "8",
+    92: "9", 96: "\u0010", 97: "\u0010", 98: "\u0010", 99: "\u0010",
+    100: "\u0010", 101: "\u0010", 102: "\u0010", 103: "\u0010",
+    104: "\u0010", 105: "\u0010", 106: "\u0010", 107: "\u0010",
+    108: "\u0010", 109: "\u0010", 110: "\u0010", 111: "\u0010",
+    112: "\u0010", 113: "\u0010", 114: "\u0005", 115: "\u0001",
+    116: "\u000b", 117: "\u007f", 118: "\u0010", 119: "\u0004",
+    120: "\u0010", 121: "\f", 122: "\u0010", 123: "\u001c",
+    124: "\u001d", 125: "\u001f", 126: "\u001e"
+}
+
+US_CAPS_LAYOUT = {
+    0: "A", 1: "S", 2: "D", 3: "F", 4: "H", 5: "G", 6: "Z", 7: "X",
+    8: "C", 9: "V", 10: "\u00b1", 11: "B", 12: "Q", 13: "W", 14: "E",
+    15: "R", 16: "Y", 17: "T", 18: "!", 19: "@", 20: "#", 21: "$",
+    22: "^", 23: "%", 24: "+", 25: "(", 26: "&", 27: "_", 28: "*",
+    29: ")", 30: "}", 31: "O", 32: "U", 33: "{", 34: "I", 35: "P",
+    36: "\r", 37: "L", 38: "J", 39: "\"", 40: "K", 41: ":", 42: "|",
+    43: "<", 44: "?", 45: "N", 46: "M", 47: ">", 48: "\t", 49: " ",
+    50: "~", 51: "\b", 52: "\u0003", 53: "\u001b", 65: ".", 66: "*",
+    67: "*", 69: "+", 70: "+", 71: "\u001b", 72: "=", 75: "/",
+    76: "\u0003", 77: "/", 78: "-", 81: "=", 82: "0", 83: "1",
+    84: "2", 85: "3", 86: "4", 87: "5", 88: "6", 89: "7", 91: "8",
+    92: "9", 96: "\u0010", 97: "\u0010", 98: "\u0010", 99: "\u0010",
+    100: "\u0010", 101: "\u0010", 102: "\u0010", 103: "\u0010",
+    104: "\u0010", 105: "\u0010", 106: "\u0010", 107: "\u0010",
+    108: "\u0010", 109: "\u0010", 110: "\u0010", 111: "\u0010",
+    112: "\u0010", 113: "\u0010", 114: "\u0005", 115: "\u0001",
+    116: "\u000b", 117: "\u007f", 118: "\u0010", 119: "\u0004",
+    120: "\u0010", 121: "\f", 122: "\u0010", 123: "\u001c",
+    124: "\u001d", 125: "\u001f", 126: "\u001e"
+}
+
 # Keylayout file template
 # For full documentation: https://developer.apple.com/library/mac/technotes/tn2056/_index.html
 KEY_LAYOUT_TEMPLATE = """\
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
+<!-- Layout is genertated with "gen-keylayout.py"
+     Author: Pavel Aslanov
+     Home  : https://github.com/aslpavel/gen-keylayout
+-->
 <keyboard group="126" id="-7777" name="{name}" maxout="1">
     <layouts>
         <!-- Expect to use it only with ANSI keyboard -->
@@ -240,13 +295,19 @@ KEY_LAYOUT_TEMPLATE = """\
         </keyMapSelect>
     </modifierMap>
     <keyMapSet id="ANSI">
-        <keyMap index="0">
+        <keyMap index="0" baseIndex="2" baseMapSet="ANSI">
 {keys}
         </keyMap>
-        <keyMap index="1">
+        <keyMap index="1" baseIndex="3" baseMapSet="ANSI">
 {keys_caps}
         </keyMap>
         <!-- default US keylayout -->
+        <keyMap index="2">
+{keys_default}
+        </keyMap>
+        <keyMap index="3">
+{keys_caps_default}
+        </keyMap>
     </keyMapSet>
     <actions>
 {actions}
