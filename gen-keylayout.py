@@ -16,10 +16,12 @@ import os
 import io
 import sys
 import json
-import random
+import binascii
 
+class KeysError(Exception):
+    pass
 
-class KeyTree(object):
+class Keys(object):
     __slots__ = ('code', 'output', 'children',)
 
     def __init__(self, code, output=None):
@@ -32,23 +34,20 @@ class KeyTree(object):
         for name in path:
             code = NAME_TO_CODE.get(name)
             if code is None:
-                sys.stderr.write("[error] Invalid code name '{}'\n".format(name))
-                sys.exit(1)
+                raise KeysError("invalid code name '{}'".format(name))
             codes.append(code)
         if not codes:
-            sys.stderr.write("[error] Empty code path\n")
-            sys.exit(1)
+            raise KeysError("empty code path")
         node = self
         for code in codes:
             children = {child.code: child for child in node.children}
             child = children.get(code)
             if child is None:
-                child = KeyTree(code)
+                child = Keys(code)
                 node.children.append(child)
             node = child
         if node.output is not None:
-            sys.stderr.write("[error] Duplicating path '{}'\n".format(path))
-            sys.exit(1)
+            raise KeysError("duplicating path '{}'".format(path))
         node.output = escape(output)
 
     def compile(self):
@@ -96,34 +95,12 @@ class KeyTree(object):
         return str(self)
 
 
-def main():
-    if len(sys.argv) < 2:
-        sys.stderr.write('Usage: {} <layout.json>\n'.format(os.path.basename(sys.argv[0])))
-        sys.exit(1)
-    if sys.version_info[0] < 3:
-        sys.stderr.write('[error] Python version is less then 3.0\n')
-        sys.exit(1)
-    with open(sys.argv[1]) as layout_file:
-        layout = json.load(layout_file)
-
-    # validate
-    for name, validate in {
-        "name": lambda name: isinstance(name, str),
-        "keys": lambda keys: isinstance(keys, dict) \
-                        and all(isinstance(out, str) for out in keys.values())
-    }.items():
-        val = layout.get(name)
-        if val is None:
-            sys.stderr.write("[error] Required field {} is not specified\n"
-                             .format(name))
-            sys.exit(1)
-        if not validate(val):
-            sys.stderr.write("[error] Field '{}' has incorrect format\n".format(name))
-            sys.exit(1)
-
+def make_layout(name, keys):
+    """Creeate keylayout with provied provided name and keys.
+    """
     # build key tree
-    tree = KeyTree(None)
-    for path, output in layout["keys"].items():
+    tree = Keys(None)
+    for path, output in keys.items():
         tree.add(path, output)
     keys, actions, terms = tree.compile()
 
@@ -157,10 +134,11 @@ def main():
 
     keys_default = {c: ("output", escape(o)) for c, o in US_LAYOUT.items()}
     keys_caps_default = {c: ("output", escape(o)) for c, o in US_CAPS_LAYOUT.items()}
-    sys.stdout.write(KEY_LAYOUT_TEMPLATE.format(**{
-        'name'        : layout['name'],
+    return (KEY_LAYOUT_TEMPLATE.format(**{
+        'name'        : name,
         'group'       : 7,
-        'index'       : -random.randint(2, 1<<15), # negative for generic unicode layouts
+        # index should be negative for generic unicode layouts
+        'index'       : -(binascii.crc32(name.encode())%(1<<15)),
         'keys'        : keys_fmt({k: v for k, v in keys.items() if k <= 0xff}, 3),
         'keys_caps'   : keys_fmt({k & 0xff: v for k, v in keys.items() if k > 0xff}, 3),
         'keys_default': keys_fmt(keys_default, 3),
@@ -300,28 +278,38 @@ KEY_LAYOUT_TEMPLATE = """\
     <layouts>
         <layout first="0" last="207" modifiers="modifiers" mapSet="ANSI" />
     </layouts>
-    <modifierMap id="modifiers" defaultIndex="2">
+    <modifierMap id="modifiers" defaultIndex="0">
         <keyMapSelect mapIndex="0">
-            <modifier keys="" />
+            <modifier keys="anyControl? anyOption? command?" />
+            <modifier keys="caps anyShift anyControl? anyOption? command?" />
         </keyMapSelect>
         <keyMapSelect mapIndex="1">
+            <modifier keys="anyShift anyControl? anyOption? command?" />
+            <modifier keys="caps anyControl? anyOption? command?" />
+        </keyMapSelect>
+        <keyMapSelect mapIndex="2">
+            <modifier keys="" />
+            <modifier keys="caps anyShift" />
+        </keyMapSelect>
+        <keyMapSelect mapIndex="3">
             <modifier keys="anyShift" />
             <modifier keys="caps" />
         </keyMapSelect>
     </modifierMap>
     <keyMapSet id="ANSI">
-        <keyMap index="0" baseIndex="2" baseMapSet="ANSI">
-{keys}
-        </keyMap>
-        <keyMap index="1" baseIndex="3" baseMapSet="ANSI">
-{keys_caps}
-        </keyMap>
-        <!-- default US keylayout -->
-        <keyMap index="2">
+        <!-- default ANSI US layout -->
+        <keyMap index="0">
 {keys_default}
         </keyMap>
-        <keyMap index="3">
+        <keyMap index="1">
 {keys_caps_default}
+        </keyMap>
+        <!-- custom layout -->
+        <keyMap index="2" baseIndex="0" baseMapSet="ANSI">
+{keys}
+        </keyMap>
+        <keyMap index="3" baseIndex="1" baseMapSet="ANSI">
+{keys_caps}
         </keyMap>
     </keyMapSet>
     <actions>
@@ -332,6 +320,37 @@ KEY_LAYOUT_TEMPLATE = """\
     </terminators>
 </keyboard>
 """
+
+
+def main():
+    if len(sys.argv) < 2:
+        sys.stderr.write('Usage: {} <layout.json>\n'.format(os.path.basename(sys.argv[0])))
+        sys.exit(1)
+    if sys.version_info[0] < 3:
+        sys.stderr.write('[error] Python version is less then 3.0\n')
+        sys.exit(1)
+    with open(sys.argv[1]) as layout_file:
+        layout = json.load(layout_file)
+
+    # validate
+    for name, validate in {
+        "name": lambda name: isinstance(name, str),
+        "keys": lambda keys: isinstance(keys, dict) \
+                        and all(isinstance(out, str) for out in keys.values())
+    }.items():
+        val = layout.get(name)
+        if val is None:
+            sys.stderr.write("[error] Required field {} is not specified\n"
+                             .format(name))
+            sys.exit(1)
+        if not validate(val):
+            sys.stderr.write("[error] Field '{}' has incorrect format\n".format(name))
+            sys.exit(1)
+    try:
+        sys.stdout.write(make_layout(layout['name'], layout['keys']))
+    except KeysError as e:
+        sys.stderr.write('[error] {}\n'.format(e.args[0]))
+
 
 if __name__ == '__main__':
     main()
