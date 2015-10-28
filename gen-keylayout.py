@@ -1,10 +1,22 @@
 #! /usr/bin/env python3
-"""Utility to build MacOSX keylayout files from simple json format.
+"""Utility to build MacOSX keylayout files from simple JSON format.
+
+ Author   : Pavel Aslanov
+ Source   : https://github.com/aslpavel/gen-keylayout
+ Reference: https://developer.apple.com/library/mac/technotes/tn2056/_index.html
+ Format   :
+   { "name": "some-keyboard-name",
+     "keys": {
+       "sequence-ansii-keys": "utf-8 sequence might be in json encoding \u0020",
+       ...
+     }
+   }
 """
 import os
 import io
 import sys
 import json
+import random
 
 
 class KeyTree(object):
@@ -40,6 +52,8 @@ class KeyTree(object):
         node.output = escape(output)
 
     def compile(self):
+        """Compile tree to automata used by keyboard layout engine
+        """
         actions = {}
         terms   = {}
         state   = state_factory()
@@ -91,6 +105,7 @@ def main():
         sys.exit(1)
     with open(sys.argv[1]) as layout_file:
         layout = json.load(layout_file)
+
     # validate
     for name, validate in {
         "name": lambda name: isinstance(name, str),
@@ -145,7 +160,7 @@ def main():
     sys.stdout.write(KEY_LAYOUT_TEMPLATE.format(**{
         'name'        : layout['name'],
         'group'       : 7,
-        'index'       : 19458,
+        'index'       : -random.randint(2, 1<<15), # negative for generic unicode layouts
         'keys'        : keys_fmt({k: v for k, v in keys.items() if k <= 0xff}, 3),
         'keys_caps'   : keys_fmt({k & 0xff: v for k, v in keys.items() if k > 0xff}, 3),
         'keys_default': keys_fmt(keys_default, 3),
@@ -173,7 +188,7 @@ def escape(string):
     """
     return ''.join('&#x{:0>4x};'.format(ord(c)) for c in string)
 
-# Reference file for name on MacOS system
+# Reference file for key names on MacOS system
 # /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.
 s = lambda c: c | 0x100
 NAME_TO_CODE = {
@@ -280,9 +295,9 @@ KEY_LAYOUT_TEMPLATE = """\
      Author: Pavel Aslanov
      Home  : https://github.com/aslpavel/gen-keylayout
 -->
-<keyboard group="126" id="-7777" name="{name}" maxout="1">
+<!-- group 126 signifies that keyboard can return any Unicode symbols -->
+<keyboard group="126" id="{index}" name="{name}">
     <layouts>
-        <!-- Expect to use it only with ANSI keyboard -->
         <layout first="0" last="207" modifiers="modifiers" mapSet="ANSI" />
     </layouts>
     <modifierMap id="modifiers" defaultIndex="2">
