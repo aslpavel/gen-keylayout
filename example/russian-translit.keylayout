@@ -312,240 +312,240 @@
     <actions>
         <action id="0">
             <when state="none" output="&#x0430;" />
-            <when state=":2" output="&#x042f;" />
-            <when state=":22" output="&#x042f;" />
-            <when state=":23" output="&#x044f;" />
-            <when state=":25" output="&#x044f;" />
+            <when state=":12" output="&#x042f;" />
+            <when state=":20" output="&#x042f;" />
+            <when state=":24" output="&#x044f;" />
+            <when state=":30" output="&#x044f;" />
         </action>
         <action id="1">
-            <when state="none" next=":17" />
-            <when state=":8" next=":9" />
+            <when state="none" next=":26" />
+            <when state=":2" next=":8" />
         </action>
         <action id="2">
             <when state="none" output="&#x0434;" />
-            <when state=":8" output="&#x0452;" />
+            <when state=":2" output="&#x0452;" />
         </action>
         <action id="4">
             <when state="none" output="&#x0445;" />
-            <when state=":11" next=":12" />
-            <when state=":14" output="&#x040b;" />
-            <when state=":15" output="&#x045b;" />
-            <when state=":17" next=":18" />
-            <when state=":19" output="&#x0449;" />
-            <when state=":24" output="&#x0427;" />
-            <when state=":26" output="&#x0436;" />
-            <when state=":27" output="&#x0445;" />
-            <when state=":28" output="&#x0425;" />
-            <when state=":3" next=":4" />
-            <when state=":30" output="&#x0447;" />
-            <when state=":32" output="&#x0416;" />
-            <when state=":5" output="&#x0429;" />
-            <when state=":9" next=":10" />
+            <when state=":10" output="&#x0427;" />
+            <when state=":13" output="&#x0425;" />
+            <when state=":14" next=":17" />
+            <when state=":18" output="&#x0429;" />
+            <when state=":21" output="&#x0416;" />
+            <when state=":22" output="&#x0447;" />
+            <when state=":25" output="&#x0445;" />
+            <when state=":26" next=":27" />
+            <when state=":28" output="&#x0449;" />
+            <when state=":3" output="&#x040b;" />
+            <when state=":31" output="&#x0436;" />
+            <when state=":4" next=":6" />
+            <when state=":7" output="&#x045b;" />
+            <when state=":8" next=":9" />
         </action>
         <action id="5">
             <when state="none" output="&#x0433;" />
-            <when state=":8" output="&#x0453;" />
+            <when state=":2" output="&#x0453;" />
         </action>
         <action id="6">
-            <when state="none" next=":26" />
-            <when state=":8" output="&#x045f;" />
+            <when state="none" next=":31" />
+            <when state=":2" output="&#x045f;" />
         </action>
         <action id="8">
-            <when state="none" next=":30" />
-            <when state=":18" next=":19" />
-            <when state=":4" next=":5" />
-            <when state=":8" next=":15" />
+            <when state="none" next=":22" />
+            <when state=":17" next=":18" />
+            <when state=":2" next=":7" />
+            <when state=":27" next=":28" />
         </action>
         <action id="14">
-            <when state="none" next=":16" />
-            <when state=":2" output="&#x0415;" />
-            <when state=":25" output="&#x0435;" />
-            <when state=":8" output="&#x0454;" />
+            <when state="none" next=":23" />
+            <when state=":12" output="&#x0415;" />
+            <when state=":2" output="&#x0454;" />
+            <when state=":24" output="&#x0435;" />
         </action>
         <action id="16">
-            <when state="none" next=":23" />
+            <when state="none" next=":30" />
         </action>
         <action id="17">
             <when state="none" output="&#x0442;" />
-            <when state=":10" output="&#x0449;" />
-            <when state=":12" output="&#x0429;" />
-            <when state=":8" output="&#x0449;" />
+            <when state=":2" output="&#x0449;" />
+            <when state=":6" output="&#x0429;" />
+            <when state=":9" output="&#x0449;" />
         </action>
         <action id="31">
             <when state="none" output="&#x043e;" />
-            <when state=":2" output="&#x0401;" />
-            <when state=":22" output="&#x0401;" />
-            <when state=":23" output="&#x0451;" />
-            <when state=":25" output="&#x0451;" />
-            <when state=":8" output="&#x04e9;" />
+            <when state=":12" output="&#x0401;" />
+            <when state=":2" output="&#x04e9;" />
+            <when state=":20" output="&#x0401;" />
+            <when state=":24" output="&#x0451;" />
+            <when state=":30" output="&#x0451;" />
         </action>
         <action id="32">
-            <when state="none" next=":31" />
-            <when state=":2" output="&#x042e;" />
-            <when state=":22" output="&#x042e;" />
-            <when state=":23" output="&#x044e;" />
-            <when state=":25" output="&#x044e;" />
-            <when state=":8" output="&#x04af;" />
+            <when state="none" next=":29" />
+            <when state=":12" output="&#x042e;" />
+            <when state=":2" output="&#x04af;" />
+            <when state=":20" output="&#x042e;" />
+            <when state=":24" output="&#x044e;" />
+            <when state=":30" output="&#x044e;" />
         </action>
         <action id="34">
             <when state="none" output="&#x0438;" />
-            <when state=":22" output="&#x0407;" />
-            <when state=":23" output="&#x0457;" />
-            <when state=":8" output="&#x0456;" />
+            <when state=":2" output="&#x0456;" />
+            <when state=":20" output="&#x0407;" />
+            <when state=":30" output="&#x0457;" />
         </action>
         <action id="37">
             <when state="none" output="&#x043b;" />
-            <when state=":8" output="&#x0459;" />
+            <when state=":2" output="&#x0459;" />
         </action>
         <action id="38">
-            <when state="none" next=":25" />
-            <when state=":17" output="&#x0449;" />
-            <when state=":3" output="&#x0429;" />
-            <when state=":8" output="&#x0458;" />
+            <when state="none" next=":24" />
+            <when state=":14" output="&#x0429;" />
+            <when state=":2" output="&#x0458;" />
+            <when state=":26" output="&#x0449;" />
         </action>
         <action id="39">
-            <when state="none" next=":21" />
-            <when state=":16" output="&#x044d;" />
-            <when state=":2" output="&#x0419;" />
-            <when state=":20" output="&#x042d;" />
-            <when state=":21" output="&#x042c;" />
-            <when state=":25" output="&#x0439;" />
-            <when state=":29" output="&#x040e;" />
-            <when state=":31" output="&#x045e;" />
+            <when state="none" next=":1" />
+            <when state=":1" output="&#x042c;" />
+            <when state=":11" output="&#x042d;" />
+            <when state=":12" output="&#x0419;" />
+            <when state=":19" output="&#x040e;" />
+            <when state=":23" output="&#x044d;" />
+            <when state=":24" output="&#x0439;" />
+            <when state=":29" output="&#x045e;" />
         </action>
         <action id="40">
-            <when state="none" next=":27" />
-            <when state=":8" output="&#x045c;" />
+            <when state="none" next=":25" />
+            <when state=":2" output="&#x045c;" />
         </action>
         <action id="44">
-            <when state="none" next=":8" />
+            <when state="none" next=":2" />
         </action>
         <action id="45">
             <when state="none" output="&#x043d;" />
-            <when state=":8" output="&#x045a;" />
+            <when state=":2" output="&#x045a;" />
         </action>
         <action id="50">
             <when state="none" output="&#x044c;" />
-            <when state=":16" output="&#x044d;" />
-            <when state=":2" output="&#x0419;" />
-            <when state=":20" output="&#x042d;" />
-            <when state=":25" output="&#x0439;" />
+            <when state=":11" output="&#x042d;" />
+            <when state=":12" output="&#x0419;" />
+            <when state=":23" output="&#x044d;" />
+            <when state=":24" output="&#x0439;" />
         </action>
         <action id="256">
             <when state="none" output="&#x0410;" />
-            <when state=":2" output="&#x042f;" />
-            <when state=":22" output="&#x042f;" />
+            <when state=":12" output="&#x042f;" />
+            <when state=":20" output="&#x042f;" />
         </action>
         <action id="257">
-            <when state="none" next=":3" />
-            <when state=":8" next=":11" />
+            <when state="none" next=":14" />
+            <when state=":2" next=":4" />
         </action>
         <action id="258">
             <when state="none" output="&#x0414;" />
-            <when state=":8" output="&#x0402;" />
+            <when state=":2" output="&#x0402;" />
         </action>
         <action id="260">
             <when state="none" output="&#x0425;" />
-            <when state=":11" next=":13" />
-            <when state=":14" output="&#x040b;" />
-            <when state=":24" output="&#x0427;" />
-            <when state=":28" output="&#x0425;" />
-            <when state=":3" next=":6" />
-            <when state=":32" output="&#x0416;" />
-            <when state=":7" output="&#x0429;" />
+            <when state=":10" output="&#x0427;" />
+            <when state=":13" output="&#x0425;" />
+            <when state=":14" next=":15" />
+            <when state=":16" output="&#x0429;" />
+            <when state=":21" output="&#x0416;" />
+            <when state=":3" output="&#x040b;" />
+            <when state=":4" next=":5" />
         </action>
         <action id="261">
             <when state="none" output="&#x0413;" />
-            <when state=":8" output="&#x0403;" />
+            <when state=":2" output="&#x0403;" />
         </action>
         <action id="262">
-            <when state="none" next=":32" />
-            <when state=":8" output="&#x040f;" />
+            <when state="none" next=":21" />
+            <when state=":2" output="&#x040f;" />
         </action>
         <action id="264">
-            <when state="none" next=":24" />
-            <when state=":6" next=":7" />
-            <when state=":8" next=":14" />
+            <when state="none" next=":10" />
+            <when state=":15" next=":16" />
+            <when state=":2" next=":3" />
         </action>
         <action id="270">
-            <when state="none" next=":20" />
-            <when state=":2" output="&#x0415;" />
-            <when state=":22" output="&#x0404;" />
-            <when state=":8" output="&#x0404;" />
+            <when state="none" next=":11" />
+            <when state=":12" output="&#x0415;" />
+            <when state=":2" output="&#x0404;" />
+            <when state=":20" output="&#x0404;" />
         </action>
         <action id="272">
-            <when state="none" next=":22" />
+            <when state="none" next=":20" />
         </action>
         <action id="273">
             <when state="none" output="&#x0422;" />
-            <when state=":13" output="&#x0429;" />
-            <when state=":8" output="&#x0429;" />
+            <when state=":2" output="&#x0429;" />
+            <when state=":5" output="&#x0429;" />
         </action>
         <action id="287">
             <when state="none" output="&#x041e;" />
-            <when state=":2" output="&#x0401;" />
-            <when state=":22" output="&#x0401;" />
-            <when state=":8" output="&#x04e8;" />
+            <when state=":12" output="&#x0401;" />
+            <when state=":2" output="&#x04e8;" />
+            <when state=":20" output="&#x0401;" />
         </action>
         <action id="288">
-            <when state="none" next=":29" />
-            <when state=":2" output="&#x042e;" />
-            <when state=":22" output="&#x042e;" />
-            <when state=":8" output="&#x04ae;" />
+            <when state="none" next=":19" />
+            <when state=":12" output="&#x042e;" />
+            <when state=":2" output="&#x04ae;" />
+            <when state=":20" output="&#x042e;" />
         </action>
         <action id="290">
             <when state="none" output="&#x0418;" />
-            <when state=":22" output="&#x0407;" />
-            <when state=":8" output="&#x0406;" />
+            <when state=":2" output="&#x0406;" />
+            <when state=":20" output="&#x0407;" />
         </action>
         <action id="293">
             <when state="none" output="&#x041b;" />
-            <when state=":8" output="&#x0409;" />
+            <when state=":2" output="&#x0409;" />
         </action>
         <action id="294">
-            <when state="none" next=":2" />
-            <when state=":3" output="&#x0429;" />
-            <when state=":8" output="&#x0408;" />
+            <when state="none" next=":12" />
+            <when state=":14" output="&#x0429;" />
+            <when state=":2" output="&#x0408;" />
         </action>
         <action id="296">
-            <when state="none" next=":28" />
-            <when state=":8" output="&#x040c;" />
+            <when state="none" next=":13" />
+            <when state=":2" output="&#x040c;" />
         </action>
         <action id="301">
             <when state="none" output="&#x041d;" />
-            <when state=":8" output="&#x040a;" />
+            <when state=":2" output="&#x040a;" />
         </action>
         <action id="306">
-            <when state="none" next=":1" />
-            <when state=":1" output="&#x042a;" />
-            <when state=":16" output="&#x0463;" />
-            <when state=":20" output="&#x0462;" />
+            <when state="none" next=":32" />
+            <when state=":11" output="&#x0462;" />
+            <when state=":23" output="&#x0463;" />
+            <when state=":32" output="&#x042a;" />
         </action>
     </actions>
     <terminators>
-        <when state=":1" output="&#x044a;" />
-        <when state=":11" output="&#x0405;" />
-        <when state=":16" output="&#x0435;" />
-        <when state=":17" output="&#x0441;" />
-        <when state=":18" output="&#x0448;" />
-        <when state=":2" output="&#x0419;" />
-        <when state=":20" output="&#x0415;" />
-        <when state=":21" output="&#x044c;" />
-        <when state=":22" output="&#x042b;" />
-        <when state=":23" output="&#x044b;" />
-        <when state=":24" output="&#x0426;" />
-        <when state=":25" output="&#x0439;" />
-        <when state=":26" output="&#x0437;" />
-        <when state=":27" output="&#x043a;" />
-        <when state=":28" output="&#x041a;" />
-        <when state=":29" output="&#x0423;" />
-        <when state=":3" output="&#x0421;" />
-        <when state=":30" output="&#x0446;" />
-        <when state=":31" output="&#x0443;" />
-        <when state=":32" output="&#x0417;" />
-        <when state=":4" output="&#x0428;" />
-        <when state=":6" output="&#x0428;" />
-        <when state=":8" output="&#x002f;" />
-        <when state=":9" output="&#x0455;" />
+        <when state=":1" output="&#x044c;" />
+        <when state=":10" output="&#x0426;" />
+        <when state=":11" output="&#x0415;" />
+        <when state=":12" output="&#x0419;" />
+        <when state=":13" output="&#x041a;" />
+        <when state=":14" output="&#x0421;" />
+        <when state=":15" output="&#x0428;" />
+        <when state=":17" output="&#x0428;" />
+        <when state=":19" output="&#x0423;" />
+        <when state=":2" output="&#x002f;" />
+        <when state=":20" output="&#x042b;" />
+        <when state=":21" output="&#x0417;" />
+        <when state=":22" output="&#x0446;" />
+        <when state=":23" output="&#x0435;" />
+        <when state=":24" output="&#x0439;" />
+        <when state=":25" output="&#x043a;" />
+        <when state=":26" output="&#x0441;" />
+        <when state=":27" output="&#x0448;" />
+        <when state=":29" output="&#x0443;" />
+        <when state=":30" output="&#x044b;" />
+        <when state=":31" output="&#x0437;" />
+        <when state=":32" output="&#x044a;" />
+        <when state=":4" output="&#x0405;" />
+        <when state=":8" output="&#x0455;" />
     </terminators>
 </keyboard>

@@ -100,7 +100,7 @@ def make_layout(name, keys):
     """
     # build key tree
     tree = Keys(None)
-    for path, output in keys.items():
+    for path, output in sorted(keys.items()):
         tree.add(path, output)
     keys, actions, terms = tree.compile()
 
