@@ -2,7 +2,7 @@
 Generate MacOS keylayout based on JSON description.
 
 ## Rationale
-Constructing xml keyboard layout by hand or even with tools like *Ukelele* is a tedious task.
+Constructing xml keyboard layout by hand or even with tools like [Ukelele][ukelele] is a tedious task.
 So I wrote simple python script with no external dependancies, to make your life easier if 
 found yourself in a situation where all existing keyboards does not work as you want them to.
 
@@ -27,3 +27,9 @@ can be found in [example folder](example).
 * Works only with python of version 3 and higher.
 * Fallbacks to US keyboard with all modifiers except *shift* and *caps*
   it helps to use default hotkeys
+
+## Links
+* Installable Keyboard Layouts [reference][reference].
+* [Ukelele][ukelele] utility.
+[ukelele]: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele
+[reference]: https://developer.apple.com/library/mac/technotes/tn2056/_index.html
