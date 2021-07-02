@@ -4,7 +4,7 @@ Generate MacOS keylayout based on JSON description.
 ## Rationale
 Constructing xml keyboard layout by hand or even with tools like [Ukelele][ukelele] is a tedious task.
 So I wrote simple python script with no external dependancies, to make your life easier if 
-found yourself in a situation where all existing keyboards does not work as you want them to.
+found yourself in a situation where all existing keyboards do not work as you want them to.
 
 ## Usage
 ```bash
